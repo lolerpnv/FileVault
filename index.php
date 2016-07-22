@@ -13,7 +13,7 @@ if(isset($_SESSION['user']))//not logged in
     $output = '<html><meta http-equiv="refresh" content="0;url=http://localhost/FileVault/model/user_index.php"/></html>';
 
 }else {
-    $output = include_once "html/welcome.html";
+    $output = '<html><meta http-equiv="refresh" content="0;url=http://localhost/FileVault/html/welcome.html"/></html>';
 }
 
 echo $output;

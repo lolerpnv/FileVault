@@ -56,5 +56,3 @@ if(isset($_GET['choice'])) {
             break;
     }
 }else echo include_once("html/user_index_files.php");?>
-</body>
-</html>
