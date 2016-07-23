@@ -8,7 +8,7 @@
 $user = $_POST["usr"];
 $pass = $_POST["pwd"];
 
-$conn = include_once("dbLogin.php");
+$conn = include("dbLogin.php");
 
 //$pass = md5(md5($pass));
 
@@ -16,9 +16,11 @@ $sql = "SELECT * FROM user WHERE pass='$pass' AND username='$user'";
 $result = $conn->query($sql);
 if($result->num_rows == 1 )
 {
+    $rs = $result->fetch_assoc();
     session_start();
     $_SESSION['user']=$user;
-    $output = '<html><meta http-equiv="refresh" content="0;url=http://localhost/FileVault/index.php"/></html>';
+    $_SESSION['user_id']=$rs['id'];
+    $output = '<html><meta http-equiv="refresh" content="0;url='.URL.'index.php"/></html>';
     //$output = "<html><body>LOGIRAN</body></html>";
 }
 $conn->close();

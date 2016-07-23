@@ -9,11 +9,7 @@
  */
 
 // Create connection
-$conn = new mysqli("localhost","tpap", "CnSs.964","tpap");
+$conn = new PDO("mysql:host=localhost;dbname=tpap","tpap", "CnSs.964");
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 //echo "Connected successfully";
 return $conn;

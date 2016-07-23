@@ -8,5 +8,5 @@
 session_start();
 session_unset();
 session_destroy();
-$output = '<html><meta http-equiv="refresh" content="0;url=http://localhost/FileVault/index.php"/></html>';
+$output = '<html><meta http-equiv="refresh" content="0;url='.URL.'index.php"/></html>';
 echo $output;

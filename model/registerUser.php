@@ -18,11 +18,11 @@ if(isset($_GET['reg']) and $_GET['reg'] == 'check') {
     //$conn->close();
 
     if ($_POST['pwd'] != $_POST['pwd2']) {
-        return '<html><meta http-equiv="refresh" content="0;url=http://localhost/FileVault/model/registerForm.php?reg=passwords dont match"/></html>';
+        return '<html><meta http-equiv="refresh" content="0;url='.URL.'model/registerForm.php?reg=passwords dont match"/></html>';
     /*}else if ($mailis->num_rows > 0) {echo "one";
-        return '<html><meta http-equiv="refresh" content="0;url=http://localhost/FileVault/model/registerForm.php?reg=email taken"/></html>';
+        return '<html><meta http-equiv="refresh" content="0;url='.URL.'model/registerForm.php?reg=email taken"/></html>';
     }else if($usernameis->num_rows > 0){echo "two";
-        return '<html><meta http-equiv="refresh" content="0;url=http://localhost/FileVault/model/registerForm.php?reg=username taken"/></html>';*/
+        return '<html><meta http-equiv="refresh" content="0;url='.URL.'model/registerForm.php?reg=username taken"/></html>';*/
     }
     else {
         echo "else fail";
@@ -40,7 +40,7 @@ if(isset($_GET['reg']) and $_GET['reg'] == 'check') {
         echo "databse done";
     }
 }
-else echo '<html><meta http-equiv="refresh" content="0;url=http://localhost/FileVault/model/registerForm.php"/></html>';
+else echo '<html><meta http-equiv="refresh" content="0;url='.URL.'model/registerForm.php"/></html>';
 
 function sql($sql)
 {

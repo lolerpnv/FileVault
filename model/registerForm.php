@@ -16,7 +16,8 @@
 <body>
 
 <h1 align="center"style="padding-top: 4%">Welcome to FileVault</h1>
-<form role="form" action="http://localhost/FileVault/model/registerUser.php?reg=check" method="post" align = "center" style="padding-left: 40%;padding-right: 40%;padding-top: 5%">
+<form role="form" action="<?php echo URL; ?>index.php" method="post" align = "center" style="padding-left: 40%;padding-right: 40%;padding-top: 5%">
+    <input type="hidden" name="action" value="register"/>
     <div class="form-group">
         <label for="usr">Username:</label>
         <input type="text" class="form-control" id="usr" name="usr">

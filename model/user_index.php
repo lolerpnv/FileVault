@@ -28,31 +28,34 @@ if(session_status()!=2)session_start();
                 <a class="navbar-brand" href="#">WebSiteName</a>
             </div>
             <ul class="nav navbar-nav">
-                <li><a href="http://localhost/FileVault/model/user_index.php?choice=1">Files</a></li>
-                <li><a href="http://localhost/FileVault/model/user_index.php?choice=2">Upload</a></li>
-                <li><a href="http://localhost/FileVault/model/user_index.php?choice=3">Settings</a></li>
+                <li><a href="<?php echo URL; ?>index.php?choice=1">Files</a></li>
+                <li><a href="<?php echo URL; ?>index.php?choice=2">Upload</a></li>
+                <li><a href="<?php echo URL; ?>index.php?choice=3">Settings</a></li>
             </ul>
             <div class="navbar-header" align="right">
-                <a class="navbar-brand" href="http://localhost/FileVault/model/logoutUser.php">Logout as <?php session_start();  echo $_SESSION['user']?></a>
+                <form class="navbar-brand" method="post" href="<?php echo URL; ?>index.php">
+                    <input type="hidden" name="action" value="logout" />
+                    <button type="submit" class="btn btn-default"> Logout as <?php if(session_status()!=2)session_start();  echo $_SESSION['user']?></button>
+                </form>
             </div>
         </div>
     </nav>
 <?php
 if(session_status()!=2)session_start();
-if(isset($_GET['choice'])) {
-    switch ($_GET['choice'])
+if(isset($choice)) {
+    switch ($choice)
     {
         case 1:
-            echo include_once ("html/user_index_files.php");
+            include ("html/user_index_files.php");
             break;
         case 2:
-            echo include_once ("html/user_index_upload.php");
+            include ("html/user_index_upload.php");
             break;
         case 3:
-            echo include_once ("html/user_index_settings.php");
+            include ("html/user_index_settings.php");
             break;
         default :
-            echo include_once ("html/user_index_files.php");
+            include ("html/user_index_files.php");
             break;
     }
-}else echo include_once("html/user_index_files.php");?>
+}else include("html/user_index_files.php");?>
