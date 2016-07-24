@@ -23,13 +23,13 @@ if(isset($_SESSION['user'])) {
     }
 // Check if $uploadOk is set to 0 by an error
     if ($uploadOk == 0) {
-        echo "Sorry, your file was not uploaded.<br/><a href='http://localhost/FileVault/model/user_index.php'><button>Homepage</button></a>";
+        echo "Sorry, your file was not uploaded.<br/><a href='http://localhost/FileVault/index.php'><button>Homepage</button></a>";
 // if everything is ok, try to upload file
     } else {
         if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
             echo "The file " . basename($_FILES["fileToUpload"]["name"]) . " has been uploaded.";
             addAsset($_FILES['fileToUpload']['name'],$target_link,$_FILES['fileToUpload']['size'],$_POST['private'],1);
-            echo '<html><meta http-equiv="refresh" content="0;url=http://localhost/FileVault/model/user_index.php"/></html>';
+            echo '<html><meta http-equiv="refresh" content="0;url=http://localhost/FileVault/index.php"/></html>';
         } else {
             echo "Sorry, there was an error uploading your file.";
         }

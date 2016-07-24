@@ -7,7 +7,7 @@
  * Time: 16:00
  */
 ?>
-<form align="center" class="form-inline" role="form" action="/index.php" method="post" enctype="multipart/form-data" >
+<form align="center" class="form-inline" role="form" action="/FileVault/index.php" method="post" enctype="multipart/form-data" >
     Select image to upload: <br/>
     <input type="hidden" name="action" value="upload"/>
     <label class="btn btn-default btn-file"> Select ...
