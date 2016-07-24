@@ -13,8 +13,9 @@ class User
 
         //$pass = md5(md5($pass));
         $pass = md5(md5($pass));
-        $sql = "SELECT * FROM user WHERE pass='$pass' AND username='$user'";
-        $result = $conn->query($sql);
+        $sql = "SELECT * FROM user WHERE pass=? AND username=?";
+        $stmt = $conn->prepare($sql);
+        $result = $stmt->execute(Array($pass,$user));
         if($result->rowCount()==1 )
         {
             $rs = $result->fetch();
@@ -22,8 +23,7 @@ class User
             $_SESSION['user']=$user;
             $_SESSION['user_id']=$rs['id'];
         }
-
-        //echo $output;
+        else return 0;
     }
     public function logout(){
         if(session_status()!=2)session_start();
@@ -32,28 +32,34 @@ class User
     }
     public function register($user,$email,$pwd,$pwd2){
         if(session_status()!=2)session_start();
-        //$conn = include "dbLogin.php";
-        //$mailis = sql("SELECT COUNT(email) FROM user WHERE email='$email'");
-        //$usernameis = sql("SELECT COUNT(username) FROM user WHERE username='$username'");
-        //$conn->close();
+        $conn= include "dbLogin.php";
+        //EMAIL
+        $Estmt = $conn->prepare("SELECT * FROM user WHERE email=:email ");
+        $Estmt->bindParam(':email',$email);
+        $Estmt->execute();
+        //USERNAME
+        $Ustmt = $conn->prepare("SELECT * FROM user WHERE username=:user ");
+        $Ustmt->bindParam(':user',$user);
+        $Ustmt->execute();
 
-        if ($pwd != $pwd) {
-            return '<html><meta http-equiv="refresh" content="0;url='.URL.'model/registerForm.php?reg=passwords dont match"/></html>';
-            /*}else if ($mailis->num_rows > 0) {echo "one";
-                return '<html><meta http-equiv="refresh" content="0;url='.URL.'model/registerForm.php?reg=email taken"/></html>';
-            }else if($usernameis->num_rows > 0){echo "two";
-                return '<html><meta http-equiv="refresh" content="0;url='.URL.'model/registerForm.php?reg=username taken"/></html>';*/
+        if ($pwd != $pwd2) {
+            return "passwords do not match";
+        }else if($Ustmt->rowCount() != 0){
+            return "username already in use.";
+        }else if($Estmt->rowCount() != 0){
+            return "email already in use.";
         }
+
         else {
-            $conn= include "dbLogin.php";
             $sql = "INSERT INTO user (username, email, pass, active) VALUES (:user,:email, :password,'false')";
             $statement = $conn->prepare($sql);
             $statement->bindParam(':user',$user);
             $statement->bindParam(':email',$email);
             $statement->bindParam(':password',md5(md5($pwd)));
             $statement->execute();
-
+            return 1;
         }
 
     }
+    public function upload(){}
 }

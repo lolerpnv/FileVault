@@ -15,21 +15,28 @@ if(isset($_POST['action']))
     switch ($_POST['action'])
     {
         case "login":
-            $user->login($_POST['usr'],$_POST['pwd']);
-            include "model/user_index.php";
+            $result = $user->login($_POST['usr'],$_POST['pwd']);
+            if($result == 0)include "html/welcome.html";
+            else include "model/user_index.php";
             break;
         case "registerform":
             include "model/registerForm.php";
             break;
         case "register":
-            $user->register($_POST['usr'],$_POST['email'],$_POST['pwd'],$_POST['pwd2']);
-            include "html/welcome.html";
+            $result = $user->register($_POST['usr'],$_POST['email'],$_POST['pwd'],$_POST['pwd2']);
+            if($result == 1)
+                include "html/welcome.html";
+            else{
+                $message = $result;
+                include "model/registerForm.php";
+            }
             break;
         case "logout":
             $user->logout();
             include "html/welcome.html";
             break;
         case "upload":
+            include "model/html/upload.php";
             break;
     }
 }

@@ -43,10 +43,9 @@
  * Date: 21.7.2016.
  * Time: 16:35
  */
-if(isset($_GET['reg']))
+if(isset($message))
 {
-    $output = $_GET['reg'];
-    echo "<h5>$output</h5>";
+    echo "<h5>$message</h5>";
 }
 ?>
 </body>

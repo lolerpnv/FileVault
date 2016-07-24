@@ -7,8 +7,9 @@
  * Time: 16:00
  */
 ?>
-<form align="center" class="form-inline" role="form" action="model/html/upload.php" method="post" enctype="multipart/form-data" >
+<form align="center" class="form-inline" role="form" action="/index.php" method="post" enctype="multipart/form-data" >
     Select image to upload: <br/>
+    <input type="hidden" name="action" value="upload"/>
     <label class="btn btn-default btn-file"> Select ...
         <input type="file" name="fileToUpload" id="fileToUpload" style="display: none">
     </label> <br/>
