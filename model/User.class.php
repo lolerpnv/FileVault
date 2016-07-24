@@ -16,12 +16,14 @@ class User
         $sql = "SELECT * FROM user WHERE pass=? AND username=?";
         $stmt = $conn->prepare($sql);
         $result = $stmt->execute(Array($pass,$user));
-        if($result->rowCount()==1 )
+        if($stmt->rowCount()==1 )
         {
-            $rs = $result->fetch();
+            $rs = $stmt->fetch(PDO::FETCH_ASSOC);
+            print_r($rs);
             if(session_status()!=2)session_start();
             $_SESSION['user']=$user;
-            $_SESSION['user_id']=$rs['id'];
+            $_SESSION['user_id']=   $rs['id'];
+            return 1;
         }
         else return 0;
     }
@@ -61,5 +63,4 @@ class User
         }
 
     }
-    public function upload(){}
 }
