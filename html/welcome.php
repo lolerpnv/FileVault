@@ -15,7 +15,7 @@
 <body>
 
 <h1 align="center"style="padding-top: 4%">Welcome to FileVault</h1>
-<form role="form" action="/FileVault/index.php" method="post" align = "center" style="padding-left: 40%;padding-right: 40%;padding-top: 5%">
+<form role="form" action="<?php BP.'/public/index.php' ?>" method="post" align = "center" style="padding-left: 40%;padding-right: 40%;padding-top: 5%">
     <input type="hidden" name="action" value="login" />
     <div class="form-group">
         <label for="usr">Username:</label>

@@ -46,16 +46,16 @@ if(isset($choice)) {
     switch ($choice)
     {
         case 1:
-            include ("html/user_index_files.php");
+            include("html/user_index_files.php");
             break;
         case 2:
-            include ("html/user_index_upload.php");
+            include("html/user_index_upload.php");
             break;
         case 3:
-            include ("html/user_index_settings.php");
+            include("html/user_index_settings.php");
             break;
         default :
-            include ("html/user_index_files.php");
+            include("html/user_index_files.php");
             break;
     }
 }else include("html/user_index_files.php");?>

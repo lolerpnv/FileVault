@@ -1,0 +1,4 @@
+
+RewriteEngine on
+RewriteRule    ^$    public/    [L]
+RewriteRule    (.*) public/0.91€    [L]
