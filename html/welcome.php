@@ -15,8 +15,7 @@
 <body>
 
 <h1 align="center"style="padding-top: 4%">Welcome to FileVault</h1>
-<form role="form" action="<?php BP.'/public/index.php' ?>" method="post" align = "center" style="padding-left: 40%;padding-right: 40%;padding-top: 5%">
-    <input type="hidden" name="action" value="login" />
+<form role="form" action="<?php echo URL.'/login' ?>" method="post" align = "center" style="padding-left: 40%;padding-right: 40%;padding-top: 5%">
     <div class="form-group">
         <label for="usr">Username:</label>
         <input type="text" class="form-control" id="usr" name="usr">
@@ -28,8 +27,7 @@
     <button type="Login" class="btn btn-default">Login</button>
 </form>
 <div align="center" style="padding-top: 2%">
-    <form method="post" action="http://localhost/FileVault/index.php">
-        <input type="hidden" name="action" value="registerform" />
+    <form method="post" action="<?php echo URL.'/register' ?>">
         <button class="btn btn-default" type="submit" >Register</button>
     </form>
 </div>

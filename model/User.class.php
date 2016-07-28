@@ -15,7 +15,7 @@ class User
         $pass = md5(md5($pass));
         $db = DataBase::getInstance();
         $result = $db->query("SELECT * FROM user WHERE pass=? AND username=?",Array($pass,$user));
-        if(sizeof($result) == 1 )
+        if($result != 0 )
         {
             if(session_status() != 2)session_start();
             $_SESSION['user'] = $user;
@@ -30,18 +30,23 @@ class User
     }
     public function register($user,$email,$pwd,$pwd2){
         $db = DataBase::getInstance();
-        $emails = $db->query("SELECT * FROM user WHERE email=? ",Array($email));
-        $users = $db->query("SELECT * FROM user WHERE username=:user ",Array($user));
-
+        $emails = $db->query("SELECT * FROM user WHERE email=?",Array($email));
+        $users = $db->query("SELECT * FROM user WHERE username=?",Array($user));
         if ($pwd != $pwd2) {
             return "passwords do not match";
-        }else if(sizeof($users) != 0){
+        }else if($users != 0){
             return "username already in use.";
-        }else if(sizeof($emails)!= 0){
+        }else if($emails != 0){
             return "email already in use.";
         }else {
-            $db->query("INSERT INTO user (username, email, pass, active) VALUES (?,?,?,?)",Array($user,$email,md5(md5($pwd)),false));
+            $db->query("INSERT INTO user (username, email, pass, active) VALUES (?,?,?,?)",Array($user,$email,md5(md5($pwd)),0));
             return 1;
         }
+    }
+    public function getUserAssets($user_id)
+    {
+        $db = DataBase::getInstance();
+        $result = $db->query("SELECT * FROM asset WHERE user_id=?",Array($user_id));
+        return $result;
     }
 }

@@ -5,7 +5,6 @@
  * Date: 23.7.2016.
  * Time: 12:54
  */
-if(session_status()!= 2)session_start();
 if(isset($_SESSION['user'])) {
     $target_dir = $_SERVER['DOCUMENT_ROOT'] . "/FileVault/uploads/";
     $target_file = $target_dir . basename(md5($_FILES["fileToUpload"]["name"].$_SESSION['user'])) . "." . pathinfo($_FILES["fileToUpload"]["name"], PATHINFO_EXTENSION);
@@ -34,10 +33,6 @@ if(isset($_SESSION['user'])) {
             echo "Sorry, there was an error uploading your file.";
         }
     }
-
-
-
-
 }else echo '<html><meta http-equiv="refresh" content="0;url=http://localhost/FileVault/index.php"/></html>';
 
 
