@@ -40,6 +40,7 @@ class User
             return "email already in use.";
         }else {
             $db->query("INSERT INTO user (username, email, pass, active) VALUES (?,?,?,?)",Array($user,$email,md5(md5($pwd)),0));
+
             return 1;
         }
     }
@@ -48,5 +49,15 @@ class User
         $db = DataBase::getInstance();
         $result = $db->query("SELECT * FROM asset WHERE user_id=?",Array($user_id));
         return $result;
+    }
+    public function sendActivationMail($email){
+        // the message
+        $msg = "To activate your acount please visit given link :\n ".URL."/activate";
+
+        // use wordwrap() if lines are longer than 70 characters
+        $msg = wordwrap($msg,70);
+
+        // send email
+        mail($email,"FileVault Activation",$msg);
     }
 }

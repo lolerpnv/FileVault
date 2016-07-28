@@ -14,7 +14,7 @@
 </head>
 <body>
 <script>
-        <?php echo $message ?>
+    <?php echo $message ?>
 </script>
 
 <h1 align="center"style="padding-top: 4%">Welcome to FileVault</h1>

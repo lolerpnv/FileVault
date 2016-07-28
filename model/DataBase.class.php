@@ -45,4 +45,9 @@ class DataBase
     public function upDownloads($asset_id){
         $this->query("UPDATE asset SET downloads = downloads + 1 WHERE id=?",Array($asset_id));
     }
+    public function activateUser($id)
+    {
+        $this->stmt = $this->conn->prepare("UPDATE user SET active = 1 WHERE id=?");
+        $this->stmt->execute(Array($id));
+    }
 }

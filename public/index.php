@@ -17,6 +17,7 @@ spl_autoload_register(function ($class_name) {
 });
 $actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 $Array = explode("/",$actual_link);
+$message = "";
 $one = "";
 $two = "";
 if(isset($Array[5]))$one = $Array[5];
@@ -85,27 +86,51 @@ if(isset($_SESSION['user'])){
                 $choice = include BP."/html/user_index_files.php";
                 include BP."/html/user_index.php";
             }
-            else include BP."/html/welcome.php";
+            else {
+                $message = 'alert("Failed to login")';
+                include BP."/html/welcome.php";
+            }
             break;
 
         case "register":
             if(isset($_POST['usr'])){
                 if(($resp = $usr->register($_POST['usr'],$_POST['email'],$_POST['pwd'],$_POST['pwd2']))){
-                    $message = "successfully registered,please log in.";
+                    $usr->sendActivationMail($_POST['email']);
+                    $message = "alert(successfully registered,please log in.)";
                     include BP."/html/welcome.php";
                 }
                 else{
+                    $message = 'alert("Failed to register")';
                     echo $resp; include BP."/html/registerForm.php";
                 }
             }
             else include BP."/html/registerForm.php";
             break;
-
+        case "activate":
+            if(isset($_POST['usr']))
+            {
+                if(($usr->login($_POST['usr'],$_POST['pwd']))==1){
+                    $db = DataBase::getInstance();
+                    $db->activateUser($_SESSION['user_id']);
+                    $table = $usr->getUserAssets($_SESSION['user_id']);
+                    $choice = include BP."/html/user_index_files.php";
+                    include BP."/html/user_index.php";
+                }
+                else {
+                    $message = 'alert("Failed to login")';
+                    include BP."/html/welcome.php";
+                }
+            }else include BP."/html/activateForm.php";
+            break;
         case "files":
             if(isset($two)) {
                 $file = new FileHandle();
                 if ($file->getFile($two, $actual_link)==0) {
                     include BP . "/html/welcome.php";
+                }
+                else {
+                    $message = 'alert("There is no such file")';
+                    include BP."/html/welcome.php";
                 }
             }
             break;
