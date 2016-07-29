@@ -51,14 +51,18 @@ if(isset($_SESSION['user'])){
 
         case "files":
             $file = new FileHandle();
-
+            if(!isset($_POST['private']))$private = "off";
+            else $private = $_POST['private'];
             switch($two)
             {
                 case "up":
-                    $file->upFile($_FILES["fileToUpload"]["tmp_name"],$_FILES['fileToUpload']['name'],$_FILES['fileToUpload']['size'],$_POST['private']);
+                    $file->upFile($_FILES["fileToUpload"]["tmp_name"],$_FILES['fileToUpload']['name'],$_FILES['fileToUpload']['size'],$private);
                     $table = $usr->getUserAssets($_SESSION['user_id']);
                     $choice = include BP."/html/user_index_files.php";
                     include BP."/html/user_index.php";
+                    break;
+                case "delete":
+
                     break;
                 default :
                     if(!$file->getFile($two,$actual_link)){
@@ -69,7 +73,6 @@ if(isset($_SESSION['user'])){
                     break;
             }
             break;
-
         default:
             $table = $usr->getUserAssets($_SESSION['user_id']);
             $choice = include BP."/html/user_index_files.php";

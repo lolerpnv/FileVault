@@ -22,7 +22,7 @@ class FileHandle
                 $db->upDownloads($result[0]['id']);
                 header('Content-Description: File Transfer');
                 header('Content-Type: application/octet-stream');
-                header('Content-Disposition: attachment; filename="' . basename($file) . '"');
+                header('Content-Disposition: attachment; filename="' . basename($result[0]['name']) . '"');
                 header('Expires: 0');
                 header('Cache-Control: must-revalidate');
                 header('Pragma: public');
@@ -68,5 +68,8 @@ class FileHandle
                 return "move uploaded failed file: ".$filename." target: ".$target_file ;
             }
         }
+    }
+    public function delFile($id){
+
     }
 }
